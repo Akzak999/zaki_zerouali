@@ -7,64 +7,81 @@
 <style>
   html, body {
     margin: 0; padding: 0;
-    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #090d16 100%);
+    /* خلفية متدرجة فخمة تجمع بين أزرق البلايستيشن والداكن الاحترافي لضمان الوضوح التام */
+    background: linear-gradient(135deg, #07090e 0%, #0f172a 50%, #050b14 100%);
     color: #e2e8f0;
     font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
     display: flex; flex-direction: column; min-height: 100vh;
     justify-content: center; align-items: center;
   }
+  
+  /* تأثير إضاءة خلفية خفيف يعطي طابع Gaming Arena */
+  body::before {
+    content: "";
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(0, 67, 156, 0.25) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
   #container {
-    width: 100%; max-width: 480px; padding: 24px; box-sizing: border-box;
-    background: rgba(18, 24, 38, 0.95); 
-    border: 1px solid #3b82f6; 
-    border-radius: 16px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 20px rgba(59, 130, 246, 0.2);
+    position: relative;
+    z-index: 1;
+    width: 100%; max-width: 500px; padding: 28px; box-sizing: border-box;
+    background: rgba(13, 17, 23, 0.92); 
+    border: 2px solid #00439c; 
+    border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 67, 156, 0.4);
     text-align: center;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(14px);
   }
   #brand {
-    margin-bottom: 20px; padding-bottom: 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 22px; padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
   #brand img {
-    width: 44px; height: 44px; margin-right: 10px; border-radius: 50%;
-    vertical-align: middle; border: 2px solid #3b82f6;
+    width: 48px; height: 48px; margin-right: 12px; border-radius: 50%;
+    vertical-align: middle; border: 2px solid #4ade80;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
   }
   #brand b {
-    font-size: 19px; font-weight: 700; letter-spacing: .14em;
+    font-size: 20px; font-weight: 800; letter-spacing: .16em;
     color: #ffffff; vertical-align: middle;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
-  #state { font-size: 20px; font-weight: 700; margin: 10px 0 6px; color: #f8fafc; }
-  #det { font-size: 13px; color: #94a3b8; margin: 0 0 14px; }
+  #state { font-size: 21px; font-weight: 700; margin: 12px 0 8px; color: #ffffff; }
+  #det { font-size: 14px; color: #94a3b8; margin: 0 0 16px; }
   #det b { color: #f1f5f9; font-weight: 600; }
-  #cache { font-size: 12px; color: #64748b; margin: 0 0 14px; min-height: 18px; }
-  #cache.cacheok { color: #4ade80; font-weight: 600; }
+  #cache { font-size: 13px; color: #64748b; margin: 0 0 16px; min-height: 20px; }
+  #cache.cacheok { color: #4ade80; font-weight: 700; text-shadow: 0 0 8px rgba(74,222,128,0.4); }
   
   /* Progress Bar */
   #progress-container {
-    width: 100%; background: #1e293b; height: 8px; border-radius: 4px;
-    overflow: hidden; margin: 14px 0; display: none;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%; background: #1e293b; height: 10px; border-radius: 5px;
+    overflow: hidden; margin: 16px 0; display: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
   #progress-bar {
-    width: 0%; height: 100%; background: linear-gradient(90deg, #3b82f6, #4ade80); transition: width 0.2s ease;
+    width: 0%; height: 100%; background: linear-gradient(90deg, #00439c, #4ade80); transition: width 0.2s ease;
   }
 
   /* Manual Firmware Selection */
   #manual-fw {
-    margin-top: 18px; padding-top: 14px; border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    margin-top: 20px; padding-top: 16px; border-top: 1px dashed rgba(255, 255, 255, 0.15);
     display: none; text-align: left;
   }
-  #manual-fw p { font-size: 12px; color: #94a3b8; margin: 0 0 8px; text-align: center; }
+  #manual-fw p { font-size: 13px; color: #cbd5e1; margin: 0 0 10px; text-align: center; font-weight: 600; }
   .fw-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
   }
   .fw-btn {
-    background: #1e293b; border: 1px solid #334155; color: #f1f5f9;
-    padding: 10px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    background: #1a2332; border: 1px solid #3b82f6; color: #f1f5f9;
+    padding: 12px; border-radius: 10px; font-size: 14px; font-weight: 700;
     cursor: pointer; text-align: center; text-decoration: none; transition: all 0.2s;
   }
-  .fw-btn:hover { background: #3b82f6; color: #ffffff; border-color: #3b82f6; box-shadow: 0 0 10px rgba(59,130,246,0.4); }
+  .fw-btn:hover { background: #00439c; color: #ffffff; border-color: #60a5fa; box-shadow: 0 0 15px rgba(59,130,246,0.6); transform: translateY(-2px); }
 
   .ok { color: #4ade80; } 
   .bad { color: #f87171; } 
@@ -75,7 +92,8 @@
 
 <div id="container">
   <div id="brand">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAA3tUlEQVR42t29d5xV5bn3/b3v1XaZmT3MDG2Gjoo0KQJSREHAEvuJVokxia9503NSjq9PmtEkGp9TzJNzTo6aclLURANJNBELIgIqVRAQkI44Q2f67LLqfb9/7L3HYZiBQUly8uzPZ39mZs1ea691XffVfle5BX/Dl9ZaAhKIhBC6eFwIgVJqYBiGI48cOTI6Foudb9v2kCiKqtva2ipbWlpKwjCPKaVMIQSGYYSGYbi+76czmUxDXpediaatsbFxy5Yt27Yf69u3b7u2trZsv+uuu9bc09Pzk8bLvvvuM+rqqv9XY0P466+/rqxbt878XvT9+/ef6unpuf/bb35zR01N7f3vv//urKqq2l5SUvJ7JpP9cObVm+qX fieldValue..." alt="Logo">
+    <!-- يمكنك استبدال رابط الصورة بصورة الشعار الخاصة بك إن أردت -->
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAA3tUlEQVR42t29d5xV5bn3/b3v1XaZmT3MDG2Gjoo0KQJSREHAEvuJVokxia9503NSjq9PmtEkGp9TzJNzTo6aclLURANJNBELIgIqVRAQkI44Q2f67LLqfb9/7L3HYZiBQUly8uzPZ39mZs1ea691XffVfle5BX/Dl9ZaAhKIhBC6eFwIgVJqYBiGI48cOTI6Foudb9v2kCiKqtva2ipbWlpKwjCPKaVMIQSGYYSGYbi+76czmUxDXpediaatsbFxy5Yt27Yf69u3b7u2trZsv+uuu9bc09Pzk8bLvvvuM+rqqv9XY0P466+/rqxbt878XvT9+/ef6unpuf/bb35zR01N7f3vv//urKqq2l5SUvJ7JpP9cObVm+qX fieldValue..." alt="ZAKI GAME ARENA">
     <b>ZAKI GAME ARENA</b>
   </div>
   <div id="wrap">
@@ -100,13 +118,12 @@
 </div>
 
 <script>
-// دالة الاختيار اليدوي للإصدار مع البقاء في نفس الصفحة
+// دالة الاختيار اليدوي للإصدار والبقاء في نفس الصفحة
 function selectFw(fwKey, fwNum) {
     document.getElementById("manual-fw").style.display = "none";
     document.getElementById("det").innerHTML = "Firmware: <b>" + fwKey + "</b> &middot; <span class='ok'><b>تم الاختيار يدويًا</b></span>";
-    document.getElementById("state").textContent = "النظام جاهز في نفس الصفحة";
+    document.getElementById("state").textContent = "النظام جاهز ومستقر";
     document.getElementById("state").className = "ok";
-    // مكان تنفيذ السكريبت الخاص بالثغرة مباشرة هنا إذا لزم الأمر
 }
 
 (function () {
@@ -142,11 +159,9 @@ function selectFw(fwKey, fwNum) {
         + (supported ? " &middot; <span class='ok'><b>مدعوم</b></span>"
                      : " &middot; <span class='bad'><b>غير مدرج في الجدول</b></span>");
 
-    // وظيفة التنفيذ المباشر في نفس الصفحة بدون أي انتقال
     function go() { 
-        setState("النظام جاهز ومستقر -- يتم تشغيل الثغرة هنا...", "ok");
+        setState("النظام جاهز -- يتم تشغيل الثغرة هنا...", "ok");
         progContainer.style.display = "none";
-        // تقدر تحط أكواد الاستغلال والتشغيل هنا مباشرة دون مغادرة الصفحة
     }
 
     function waitForTap(msg, action) {
@@ -179,7 +194,7 @@ function selectFw(fwKey, fwNum) {
     } else if (ac.status === ac.UPDATEREADY) {
         try { ac.swapCache(); } catch (e) {}
         setCache("تحديث جاهز", true);
-        waitForTap("تحديث جاهز -- اضغط X أو انقر لتثبيت التحديث", function () { location.reload(); });
+        waitForTap("تحديث جاهز -- اضغط X أو انقر لإعادة التحميل", function () { location.reload(); });
     } else {
         setCache("جاري التحقق من الكاش...");
         progContainer.style.display = "block";
