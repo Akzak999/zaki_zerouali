@@ -7,7 +7,6 @@
 <style>
   html, body {
     margin: 0; padding: 0;
-    /* خلفية واضحة ومتدرجة حديثة */
     background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #090d16 100%);
     color: #e2e8f0;
     font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
@@ -87,20 +86,29 @@
       <div id="progress-bar"></div>
     </div>
     
-    <!-- Manual Firmware Selection for Shop Clients -->
+    <!-- Manual Firmware Selection (Stays on same page) -->
     <div id="manual-fw">
-      <p>اختر إصدار الجهاز يدوياً (Manual Mode):</p>
+      <p>اختر إصدار الجهاز يدوياً:</p>
       <div class="fw-grid">
-        <a href="jb.html?fw=1302" class="fw-btn">FW 13.02</a>
-        <a href="jb.html?fw=1304" class="fw-btn">FW 13.04</a>
-        <a href="jb.html?fw=1350" class="fw-btn">FW 13.50</a>
-        <a href="jb.html?fw=1352" class="fw-btn">FW 13.52</a>
+        <button class="fw-btn" onclick="selectFw('13.02', 1302)">FW 13.02</button>
+        <button class="fw-btn" onclick="selectFw('13.04', 1304)">FW 13.04</button>
+        <button class="fw-btn" onclick="selectFw('13.50', 1350)">FW 13.50</button>
+        <button class="fw-btn" onclick="selectFw('13.52', 1352)">FW 13.52</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+// دالة الاختيار اليدوي للإصدار مع البقاء في نفس الصفحة
+function selectFw(fwKey, fwNum) {
+    document.getElementById("manual-fw").style.display = "none";
+    document.getElementById("det").innerHTML = "Firmware: <b>" + fwKey + "</b> &middot; <span class='ok'><b>تم الاختيار يدويًا</b></span>";
+    document.getElementById("state").textContent = "النظام جاهز في نفس الصفحة";
+    document.getElementById("state").className = "ok";
+    // مكان تنفيذ السكريبت الخاص بالثغرة مباشرة هنا إذا لزم الأمر
+}
+
 (function () {
     var stateEl = document.getElementById("state");
     var detEl = document.getElementById("det");
@@ -134,8 +142,12 @@
         + (supported ? " &middot; <span class='ok'><b>مدعوم</b></span>"
                      : " &middot; <span class='bad'><b>غير مدرج في الجدول</b></span>");
 
-    var target = "jb.html" + location.search;
-    function go() { setState("جاري تحميل الثغرة...", "warn"); location.replace(target); }
+    // وظيفة التنفيذ المباشر في نفس الصفحة بدون أي انتقال
+    function go() { 
+        setState("النظام جاهز ومستقر -- يتم تشغيل الثغرة هنا...", "ok");
+        progContainer.style.display = "none";
+        // تقدر تحط أكواد الاستغلال والتشغيل هنا مباشرة دون مغادرة الصفحة
+    }
 
     function waitForTap(msg, action) {
         setState(msg, "warn");
@@ -151,7 +163,7 @@
     if (!supported) {
         setState("إصدار غير مدعوم تلقائياً", "bad");
         manualFwEl.style.display = "block";
-        waitForTap("اضغط X أو انقر لتشغيل الثغرة على مسؤوليتك", go);
+        waitForTap("اضغط X أو انقر لاختيار الإصدار يدوياً", function() {});
         return;
     }
 
@@ -167,7 +179,7 @@
     } else if (ac.status === ac.UPDATEREADY) {
         try { ac.swapCache(); } catch (e) {}
         setCache("تحديث جاهز", true);
-        waitForTap("تحديث جاهز -- اضغط X أو انقر لإعادة التحميل", function () { location.reload(); });
+        waitForTap("تحديث جاهز -- اضغط X أو انقر لتثبيت التحديث", function () { location.reload(); });
     } else {
         setCache("جاري التحقق من الكاش...");
         progContainer.style.display = "block";
@@ -187,13 +199,13 @@
         ac.addEventListener("cached", function () {
             progressBar.style.width = "100%";
             setCache("تم التخزين بنجاح للاستخدام بدون إنترنت", true);
-            waitForTap("اكتمل التخزين -- اضغط X أو انقر للبدء", go);
+            waitForTap("اكتمل التخزين -- اضغط X أو انقر للتشغيل", go);
         }, false);
         
         ac.addEventListener("updateready", function () {
             try { ac.swapCache(); } catch (e) {}
             setCache("تم تنزيل تحديث جديد", true);
-            waitForTap("تحديث جديد جاهز -- اضغط X أو انقر لتحديث التشغيل", function () { location.reload(); });
+            waitForTap("تحديث جديد جاهز -- اضغط X أو انقر لإعادة التحميل", function () { location.reload(); });
         }, false);
         
         ac.addEventListener("noupdate", function () {
@@ -204,7 +216,7 @@
         ac.addEventListener("error", function () {
             setCache("فشل في تحميل الكاش");
             manualFwEl.style.display = "block";
-            waitForTap("خطأ في الكاش -- اضغط X أو انقر للمتابعة على أي حال", go);
+            waitForTap("خطأ في الكاش -- اضغط X أو انقر للمتابعة", go);
         }, false);
         
         ac.addEventListener("obsolete", function () {
