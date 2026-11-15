@@ -7,35 +7,25 @@
 <style>
   html, body {
     margin: 0; padding: 0;
-    /* خلفية متدرجة فخمة تجمع بين أزرق البلايستيشن والداكن الاحترافي لضمان الوضوح التام */
-    background: linear-gradient(135deg, #07090e 0%, #0f172a 50%, #050b14 100%);
+    /* خلفية صورة المحل/تصميمك مع طبقة مظلمة لضمان الوضوح التام للقراءة */
+    background: linear-gradient(rgba(7, 9, 14, 0.82), rgba(7, 9, 14, 0.88)), url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: #e2e8f0;
     font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
     display: flex; flex-direction: column; min-height: 100vh;
     justify-content: center; align-items: center;
-  }
-  
-  /* تأثير إضاءة خلفية خفيف يعطي طابع Gaming Arena */
-  body::before {
-    content: "";
-    position: absolute;
-    width: 100%; height: 100%;
-    top: 0; left: 0;
-    background: radial-gradient(circle at 50% 30%, rgba(0, 67, 156, 0.25) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
   }
 
   #container {
     position: relative;
     z-index: 1;
     width: 100%; max-width: 500px; padding: 28px; box-sizing: border-box;
-    background: rgba(13, 17, 23, 0.92); 
+    background: rgba(13, 17, 23, 0.90); 
     border: 2px solid #00439c; 
     border-radius: 18px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 67, 156, 0.4);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 67, 156, 0.5);
     text-align: center;
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(10px);
   }
   #brand {
     margin-bottom: 22px; padding-bottom: 16px;
@@ -92,8 +82,7 @@
 
 <div id="container">
   <div id="brand">
-    <!-- يمكنك استبدال رابط الصورة بصورة الشعار الخاصة بك إن أردت -->
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAA3tUlEQVR42t29d5xV5bn3/b3v1XaZmT3MDG2Gjoo0KQJSREHAEvuJVokxia9503NSjq9PmtEkGp9TzJNzTo6aclLURANJNBELIgIqVRAQkI44Q2f67LLqfb9/7L3HYZiBQUly8uzPZ39mZs1ea691XffVfle5BX/Dl9ZaAhKIhBC6eFwIgVJqYBiGI48cOTI6Foudb9v2kCiKqtva2ipbWlpKwjCPKaVMIQSGYYSGYbi+76czmUxDXpediaatsbFxy5Yt27Yf69u3b7u2trZsv+uuu9bc09Pzk8bLvvvuM+rqqv9XY0P466+/rqxbt878XvT9+/ef6unpuf/bb35zR01N7f3vv//urKqq2l5SUvJ7JpP9cObVm+qX fieldValue..." alt="ZAKI GAME ARENA">
+    <img src="logo.png" alt="ZAKI GAME ARENA" onerror="this.style.display='none'">
     <b>ZAKI GAME ARENA</b>
   </div>
   <div id="wrap">
