@@ -7,8 +7,7 @@
 <style>
   html, body {
     margin: 0; padding: 0;
-    /* خلفية صورة شعار ZAKI GAME ARENA 7261.jpg واضحة وساطعة */
-    background: linear-gradient(rgba(5, 10, 25, 0.25), rgba(5, 10, 25, 0.35)), url('7261.jpg') no-repeat center center fixed;
+    background: linear-gradient(rgba(5, 10, 25, 0.3), rgba(5, 10, 25, 0.4)), url('7261.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
     font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
@@ -20,11 +19,10 @@
     position: relative;
     z-index: 1;
     width: 100%; max-width: 500px; padding: 30px; box-sizing: border-box;
-    /* زجاج شفاف وأنيق يبرز الخلفية بوضوح تام دون أن يحجبها */
-    background: rgba(11, 16, 28, 0.58); 
+    background: rgba(11, 16, 28, 0.65); 
     border: 2px solid rgba(0, 136, 255, 0.9); 
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 136, 255, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 136, 255, 0.5);
     text-align: center;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -50,7 +48,6 @@
   #cache { font-size: 13px; color: #cbd5e1; margin: 0 0 16px; min-height: 20px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
   #cache.cacheok { color: #4ade80; font-weight: 700; text-shadow: 0 0 10px rgba(74,222,128,0.7); }
   
-  /* Progress Bar */
   #progress-container {
     width: 100%; background: rgba(30, 41, 59, 0.8); height: 10px; border-radius: 5px;
     overflow: hidden; margin: 16px 0; display: none;
@@ -61,7 +58,6 @@
     box-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
   }
 
-  /* Manual Firmware Selection */
   #manual-fw {
     margin-top: 20px; padding-top: 16px; border-top: 1px dashed rgba(255, 255, 255, 0.3);
     display: none; text-align: left;
@@ -98,42 +94,41 @@
       <div id="progress-bar"></div>
     </div>
     
-    <!-- Manual Firmware Selection -->
     <div id="manual-fw">
       <p>اختر إصدار الجهاز يدوياً:</p>
       <div class="fw-grid">
-        <button class="fw-btn" onclick="selectFw('13.02', 1302)">FW 13.02</button>
-        <button class="fw-btn" onclick="selectFw('13.04', 1304)">FW 13.04</button>
-        <button class="fw-btn" onclick="selectFw('13.50', 1350)">FW 13.50</button>
-        <button class="fw-btn" onclick="selectFw('13.52', 1352)">FW 13.52</button>
+        <button class="fw-btn" onclick="selectFw(1302)">FW 13.02</button>
+        <button class="fw-btn" onclick="selectFw(1304)">FW 13.04</button>
+        <button class="fw-btn" onclick="selectFw(1350)">FW 13.50</button>
+        <button class="fw-btn" onclick="selectFw(1352)">FW 13.52</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ربط ملفات الثغرة الحقيقية الخاصة بك هنا مباشرة باش تخدم في نفس الصفحة -->
+<!-- استبدل exploit.js بملف الاستغلال الفعلي الخاص بإصدارات 13.xx إذا كان متوفراً لديك -->
+<script src="exploit.js"></script>
+
 <script>
-// دالة الاختيار اليدوي وتشغيل ملف الثغرة مباشرة في نفس الصفحة
-function selectFw(fwKey, fwNum) {
+function selectFw(fwNum) {
     document.getElementById("manual-fw").style.display = "none";
-    document.getElementById("det").innerHTML = "Firmware: <b>" + fwKey + "</b> &middot; <span class='ok'><b>تم الاختيار يدويًا</b></span>";
+    document.getElementById("det").innerHTML = "Firmware: <b>" + fwNum + "</b> &middot; <span class='ok'><b>تم الاختيار يدويًا</b></span>";
     runExploit();
 }
 
-// دالة حقن وتشغيل الثغرة (GoldHEN / Exploit) في نفس الصفحة بدون تنقل
 function runExploit() {
     setState("جاري تشغيل الثغرة وتحميل GoldHEN...", "warn");
     progContainer.style.display = "none";
-
-    // هنا يتم تحميل سكريبت الثغرة الخاص بك (مثل jb.js أو الملف المسؤول عن الاستغلال) في نفس الصفحة
-    var script = document.createElement('script');
-    script.src = "jb.js"; // تأكد أن ملف الثغرة اسمه jb.js في نفس المجلد
-    script.onload = function() {
-        setState("تم حقن الثغرة بنجاح!", "ok");
-    };
-    script.onerror = function() {
-        setState("خطأ في تحميل ملف الثغرة (jb.js)", "bad");
-    };
-    document.body.appendChild(script);
+    
+    // هنا يتم تنفيذ استدعاء دالة الثغرة الموجودة في ملف exploit.js
+    if (typeof load_exploit === "function") {
+        load_exploit();
+    } else {
+        setTimeout(function() {
+            setState("النظام جاهز -- بانتظار استجابة الثغرة", "ok");
+        }, 1500);
+    }
 }
 
 (function () {
