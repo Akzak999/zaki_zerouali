@@ -7,8 +7,8 @@
 <style>
   html, body {
     margin: 0; padding: 0;
-    /* خلفية واضحة جداً ونقية مع تدرج إضاءة خفيف يبرز صورة الخلفية (bg.jpg) */
-    background: linear-gradient(135deg, rgba(5, 10, 25, 0.3), rgba(10, 25, 50, 0.5)), url('bg.jpg') no-repeat center center fixed;
+    /* خلفية صورة شعار ZAKI GAME ARENA 7261.jpg واضحة وساطعة */
+    background: linear-gradient(rgba(5, 10, 25, 0.25), rgba(5, 10, 25, 0.35)), url('7261.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
     font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
@@ -16,48 +16,39 @@
     justify-content: center; align-items: center;
   }
 
-  /* إضاءة محيطية زاهية لإبراز الخلفية وطابع الألعاب */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 40%, rgba(0, 120, 255, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
   #container {
     position: relative;
     z-index: 1;
     width: 100%; max-width: 500px; padding: 30px; box-sizing: border-box;
-    /* زجاج شفاف يسمح برؤية الخلفية بوضوح تام مع الحفاظ على قراءة الكتابة بسهولة */
-    background: rgba(11, 16, 28, 0.65); 
-    border: 2px solid rgba(0, 136, 255, 0.8); 
+    /* زجاج شفاف وأنيق يبرز الخلفية بوضوح تام دون أن يحجبها */
+    background: rgba(11, 16, 28, 0.58); 
+    border: 2px solid rgba(0, 136, 255, 0.9); 
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 136, 255, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 136, 255, 0.4);
     text-align: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   #brand {
     margin-bottom: 22px; padding-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   }
   #brand img {
-    width: 50px; height: 50px; margin-right: 12px; border-radius: 50%;
+    width: 55px; height: 55px; margin-right: 12px; border-radius: 50%;
     vertical-align: middle; border: 2px solid #4ade80;
-    box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.8);
   }
   #brand b {
     font-size: 21px; font-weight: 800; letter-spacing: .16em;
     color: #ffffff; vertical-align: middle;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9);
   }
-  #state { font-size: 22px; font-weight: 800; margin: 12px 0 8px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
-  #det { font-size: 14px; color: #cbd5e1; margin: 0 0 16px; font-weight: 600; }
+  #state { font-size: 22px; font-weight: 800; margin: 12px 0 8px; color: #ffffff; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+  #det { font-size: 14px; color: #e2e8f0; margin: 0 0 16px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
   #det b { color: #ffffff; font-weight: 700; }
-  #cache { font-size: 13px; color: #94a3b8; margin: 0 0 16px; min-height: 20px; font-weight: 600; }
-  #cache.cacheok { color: #4ade80; font-weight: 700; text-shadow: 0 0 10px rgba(74,222,128,0.6); }
+  #cache { font-size: 13px; color: #cbd5e1; margin: 0 0 16px; min-height: 20px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+  #cache.cacheok { color: #4ade80; font-weight: 700; text-shadow: 0 0 10px rgba(74,222,128,0.7); }
   
   /* Progress Bar */
   #progress-container {
@@ -75,7 +66,7 @@
     margin-top: 20px; padding-top: 16px; border-top: 1px dashed rgba(255, 255, 255, 0.3);
     display: none; text-align: left;
   }
-  #manual-fw p { font-size: 13px; color: #ffffff; margin: 0 0 10px; text-align: center; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+  #manual-fw p { font-size: 13px; color: #ffffff; margin: 0 0 10px; text-align: center; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
   .fw-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
   }
@@ -83,20 +74,20 @@
     background: rgba(26, 35, 50, 0.85); border: 1px solid #3b82f6; color: #ffffff;
     padding: 12px; border-radius: 10px; font-size: 14px; font-weight: 700;
     cursor: pointer; text-align: center; text-decoration: none; transition: all 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
   }
-  .fw-btn:hover { background: #0066ff; color: #ffffff; border-color: #60a5fa; box-shadow: 0 0 18px rgba(59,130,246,0.8); transform: translateY(-2px); }
+  .fw-btn:hover { background: #0066ff; color: #ffffff; border-color: #60a5fa; box-shadow: 0 0 18px rgba(59,130,246,0.9); transform: translateY(-2px); }
 
-  .ok { color: #4ade80; text-shadow: 0 0 8px rgba(74,222,128,0.5); } 
-  .bad { color: #f87171; text-shadow: 0 0 8px rgba(248,113,113,0.5); } 
-  .warn { color: #fbbf24; text-shadow: 0 0 8px rgba(251,191,36,0.5); }
+  .ok { color: #4ade80; text-shadow: 0 0 8px rgba(74,222,128,0.6); } 
+  .bad { color: #f87171; text-shadow: 0 0 8px rgba(248,113,113,0.6); } 
+  .warn { color: #fbbf24; text-shadow: 0 0 8px rgba(251,191,36,0.6); }
 </style>
 </head>
 <body>
 
 <div id="container">
   <div id="brand">
-    <img src="logo.png" alt="ZAKI GAME ARENA" onerror="this.style.display='none'">
+    <img src="7262.jpg" alt="ZAKI GAME ARENA" onerror="this.style.display='none'">
     <b>ZAKI GAME ARENA</b>
   </div>
   <div id="wrap">
@@ -107,7 +98,7 @@
       <div id="progress-bar"></div>
     </div>
     
-    <!-- Manual Firmware Selection (Stays on same page) -->
+    <!-- Manual Firmware Selection -->
     <div id="manual-fw">
       <p>اختر إصدار الجهاز يدوياً:</p>
       <div class="fw-grid">
@@ -121,12 +112,28 @@
 </div>
 
 <script>
-// دالة الاختيار اليدوي للإصدار والبقاء في نفس الصفحة
+// دالة الاختيار اليدوي وتشغيل ملف الثغرة مباشرة في نفس الصفحة
 function selectFw(fwKey, fwNum) {
     document.getElementById("manual-fw").style.display = "none";
     document.getElementById("det").innerHTML = "Firmware: <b>" + fwKey + "</b> &middot; <span class='ok'><b>تم الاختيار يدويًا</b></span>";
-    document.getElementById("state").textContent = "النظام جاهز ومستقر";
-    document.getElementById("state").className = "ok";
+    runExploit();
+}
+
+// دالة حقن وتشغيل الثغرة (GoldHEN / Exploit) في نفس الصفحة بدون تنقل
+function runExploit() {
+    setState("جاري تشغيل الثغرة وتحميل GoldHEN...", "warn");
+    progContainer.style.display = "none";
+
+    // هنا يتم تحميل سكريبت الثغرة الخاص بك (مثل jb.js أو الملف المسؤول عن الاستغلال) في نفس الصفحة
+    var script = document.createElement('script');
+    script.src = "jb.js"; // تأكد أن ملف الثغرة اسمه jb.js في نفس المجلد
+    script.onload = function() {
+        setState("تم حقن الثغرة بنجاح!", "ok");
+    };
+    script.onerror = function() {
+        setState("خطأ في تحميل ملف الثغرة (jb.js)", "bad");
+    };
+    document.body.appendChild(script);
 }
 
 (function () {
@@ -137,7 +144,7 @@ function selectFw(fwKey, fwNum) {
     var progressBar = document.getElementById("progress-bar");
     var manualFwEl = document.getElementById("manual-fw");
 
-    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
+    window.setState = function(t, c) { stateEl.textContent = t; stateEl.className = c || ""; };
     function setCache(t, ok) { 
         cacheEl.textContent = t; 
         cacheEl.className = ok ? "cacheok" : ""; 
@@ -162,11 +169,6 @@ function selectFw(fwKey, fwNum) {
         + (supported ? " &middot; <span class='ok'><b>مدعوم</b></span>"
                      : " &middot; <span class='bad'><b>غير مدرج في الجدول</b></span>");
 
-    function go() { 
-        setState("النظام جاهز -- يتم تشغيل الثغرة هنا...", "ok");
-        progContainer.style.display = "none";
-    }
-
     function waitForTap(msg, action) {
         setState(msg, "warn");
         function fire() {
@@ -187,13 +189,13 @@ function selectFw(fwKey, fwNum) {
 
     var ac = window.applicationCache;
     if (!ac || !document.documentElement.hasAttribute("manifest")) {
-        go();
+        runExploit();
     } else if (!navigator.onLine) {
         setCache("وضع بدون إنترنت (Offline Cache)", true);
-        go();
+        runExploit();
     } else if (ac.status === ac.IDLE) {
         setCache("تم التخزين بنجاح (Cached)", true);
-        go();
+        runExploit();
     } else if (ac.status === ac.UPDATEREADY) {
         try { ac.swapCache(); } catch (e) {}
         setCache("تحديث جاهز", true);
@@ -217,7 +219,7 @@ function selectFw(fwKey, fwNum) {
         ac.addEventListener("cached", function () {
             progressBar.style.width = "100%";
             setCache("تم التخزين بنجاح للاستخدام بدون إنترنت", true);
-            waitForTap("اكتمل التخزين -- اضغط X أو انقر للتشغيل", go);
+            waitForTap("اكتمل التخزين -- اضغط X أو انقر للتشغيل", function () { runExploit(); });
         }, false);
         
         ac.addEventListener("updateready", function () {
@@ -228,19 +230,19 @@ function selectFw(fwKey, fwNum) {
         
         ac.addEventListener("noupdate", function () {
             setCache("الملفات مخزنة مسبقاً -- جاهز بدون إنترنت", true);
-            go();
+            runExploit();
         }, false);
         
         ac.addEventListener("error", function () {
             setCache("فشل في تحميل الكاش");
             manualFwEl.style.display = "block";
-            waitForTap("خطأ في الكاش -- اضغط X أو انقر للمتابعة", go);
+            waitForTap("خطأ في الكاش -- اضغط X أو انقر للمتابعة", function () { runExploit(); });
         }, false);
         
         ac.addEventListener("obsolete", function () {
-            setCache("cache obsolete");
+            setCache("الكاش أصبح قديم جداً (Obsolete)");
             manualFwEl.style.display = "block";
-            waitForTap("الكاش قديم -- اضغط X أو انقر للتشغيل", go);
+            waitForTap("الكاش قديم -- اضغط X أو انقر للتشغيل", function () { runExploit(); });
         }, false);
     }
 })();
